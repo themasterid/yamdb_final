@@ -11,7 +11,7 @@ services:
   web:
     build:
       context: ../
-      dockerfile: yamdb_final/Dockerfile
+      dockerfile: api_yamdb/Dockerfile
     restart: always
     volumes:
       - static_value:/app/static/
