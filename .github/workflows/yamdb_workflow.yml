@@ -33,13 +33,13 @@ jobs:
       - name: Login to Docker 
         uses: docker/login-action@v1 
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.MY_LOGIN }}
+          password: ${{ secrets.MY_PASS }}
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2 
         with:
           push: true
-          tags: therealrustam/api_yamdb:latest
+          tags: themasterid/yamdb_final:latest
           file: api_yamdb/Dockerfile 
   
   deploy:
