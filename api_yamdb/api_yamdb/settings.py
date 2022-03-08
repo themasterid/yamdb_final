@@ -1,8 +1,6 @@
 import os
 from datetime import timedelta
 
-from dotenv import load_dotenv
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = (
@@ -23,8 +21,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'django_filters',
-    'reviews',
     'api',
+    'reviews',
 ]
 
 MIDDLEWARE = [

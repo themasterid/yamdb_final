@@ -1,5 +1,4 @@
-# name: Django-app workflow
-name: yamdb_workflow
+name: Django-app yamdb_workflow
 
 
 on:
