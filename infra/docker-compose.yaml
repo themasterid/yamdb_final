@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   db:
@@ -11,7 +11,7 @@ services:
   web:
     build:
       context: ../
-      dockerfile: api_yamdb/Dockerfile
+      dockerfile: yamdb_final/Dockerfile
     restart: always
     volumes:
       - static_value:/app/static/

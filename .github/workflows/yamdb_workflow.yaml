@@ -1,6 +1,5 @@
 name: Django-app yamdb_workflow
 
-
 on:
   push:
     branches: [ main ]
@@ -21,6 +20,7 @@ jobs:
         python -m pip install --upgrade pip 
         pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
         pip install -r requirements.txt 
+
     - name: Test with flake8 and django tests
       run: |
         python -m flake8
@@ -44,7 +44,7 @@ jobs:
             uses: docker/build-push-action@v2 
             with:
               push: true
-              tags: themasterid/infra_actions:latest 
+              tags: themasterid/yamdb_final:latest 
   deploy:
       runs-on: ubuntu-latest
       needs: build_and_push_to_docker_hub
@@ -58,10 +58,11 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             # Выполняет pull образа с DockerHub
-            sudo docker pull themasterid/infra_actions
+            sudo docker pull themasterid/yamdb_final
             #остановка всех контейнеров
             sudo docker stop $(sudo docker ps -a -q)
-            sudo docker run --rm -d -p 5000:5000 themasterid/infra_actions
+            sudo docker run --rm -d -p 5000:5000 themasterid/yamdb_final
+  
   send_message:
     runs-on: ubuntu-latest
     needs: deploy
