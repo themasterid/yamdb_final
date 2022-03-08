@@ -1,5 +1,4 @@
 from api.filters import TitleFilter
-
 from django.core.mail import EmailMessage
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
