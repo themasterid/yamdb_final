@@ -14,4 +14,3 @@ pytest-django==4.4.0
 attrs==19.3.0
 certifi==2020.4.5.1
 chardet==3.0.4
-gunicorn==20.0.4
