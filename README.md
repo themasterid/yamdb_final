@@ -12,8 +12,8 @@ REST API проект для сервиса YaMDb — сбор отзывов о
 Все описанное ниже относится к ОС Linux. 
 Клонируем репозиторий и и переходим в него: 
 ```bash 
-git clone https://github.com/themasterid/infra_sp2 
-cd infra_sp2 
+git clone git@github.com:themasterid/yamdb_final.git
+cd yamdb_final 
 cd api_yamdb 
 ``` 
  
