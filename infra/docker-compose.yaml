@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   db:
@@ -9,6 +9,9 @@ services:
       - ./.env
 
   web:
+    build:
+      context: ..
+      dockerfile: api_yamdb/Dockerfile
     image: themasterid/yamdb_final:latest
     restart: always
     volumes:
