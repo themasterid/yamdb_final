@@ -10,13 +10,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.7
+        python-version: 3.9
 
     - name: Install dependencies
       run: | 
         python -m pip install --upgrade pip 
         pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
-        pip install -r api_yamdb/requirements.txt 
+        cd api_yamdb/
+        pip install -r requirements.txt 
 
     - name: Test with flake8 and django tests
       run: |
@@ -27,6 +28,7 @@ jobs:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     needs: tests
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2 
@@ -40,23 +42,24 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2 
         with:
+          context: ./api_yamdb/
           push: true
           tags: themasterid/yamdb_final:latest
-          file: api_yamdb/Dockerfile 
   
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     if: github.ref == 'refs/heads/master'
     steps:
-      - name: executing remote ssh commands to deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          script: |
+    - name: executing remote ssh commands to deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        script: |
+            sudo docker pull themasterid/yamdb_final:latest
             sudo docker-compose stop
             sudo docker-compose rm web
             touch .env
@@ -66,7 +69,11 @@ jobs:
             echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
+            echo SECRET_KEY="${{ secrets.SECRET_KEY }}" >> .env
             sudo docker-compose up -d
+            sudo docker-compose exec -T web python manage.py makemigrations reviews
+            sudo docker-compose exec -T web python manage.py migrate
+            sudo docker-compose exec -T web python manage.py collectstatic --no-input
 
   send_message:
     runs-on: ubuntu-latest
