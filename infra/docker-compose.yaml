@@ -22,7 +22,7 @@ services:
   nginx:
     image: nginx:1.21.3-alpine
     ports:
-      - "8084:80"
+      - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - static_value:/var/html/static/
