@@ -15,6 +15,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '62.84.115.143',
     'localhost',
+    '127.0.0.1',
     'themasterid.sytes.net',
 ]
 
