@@ -1,20 +1,19 @@
-version: '3.9'
+version: '3.8'
 
 services:
   db:
     image: postgres:13.0-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - /var/lib/postgresql/data/
     env_file:
       - ./.env
 
   web:
-    build: .
-    # image: themasterid/yamdb_final:latest
+    image: themasterid/yamdb_final:latest
     restart: always
     volumes:
-      - static_value:/app/static/
-      - media_value:/app/media/
+      - static_value:/app/api_yamdb/static/
+      - media_value:/app/api_yamdb/media/
     depends_on:
       - db
     env_file:
@@ -34,4 +33,3 @@ services:
 volumes:
   static_value:
   media_value:
-  postgres_data:

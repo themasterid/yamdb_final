@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+print(BASE_DIR)
 SECRET_KEY = (
     os.getenv('SECRET_KEY'),
     'my_mega_secret_code_ilz@4zqj=rq&agdol^##zgl9(vs')
@@ -105,15 +105,13 @@ USE_L10N = True
 USE_TZ = False
 
 
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = 'reviews/static/'
 
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'reviews/static/')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = 'reviews/media/'
 
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'reviews/media/')
 
 
 REST_FRAMEWORK = {
