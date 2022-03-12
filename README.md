@@ -45,7 +45,7 @@ docker-compose up -d --build
 docker-compose exec web python manage.py makemigrations reviews 
 ``` 
 ```bash 
-docker-compose exec web python manage.py migrate 
+docker-compose exec web python manage.py migrate --run-syncdb
 ``` 
 
 Создаем суперпользователя: 

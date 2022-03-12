@@ -14,8 +14,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '62.84.115.143',
-    'localhost',
-    '127.0.0.1',
     'themasterid.sytes.net',
     '*',
 ]
@@ -79,8 +77,6 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', default=5432)
     }
 }
-
-print(os.getenv('DB_ENGINE'))
 
 AUTH_PASSWORD_VALIDATORS = [
     {
