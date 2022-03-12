@@ -78,4 +78,4 @@ DB_HOST=db
 DB_PORT=5432 
 ``` 
 ### Документация API YaMDb 
-Документация доступна по эндпойнту: http://localhost/redoc/ 
+Документация доступна по эндпойнту: http://themasterid.sytes.net/redoc/ 

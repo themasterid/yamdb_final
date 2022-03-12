@@ -1,15 +1,16 @@
-version: '3'
+version: '3.9'
 
 services:
   db:
     image: postgres:13.0-alpine
     volumes:
-      - /var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
 
   web:
-    image: themasterid/yamdb_final:latest
+    build: .
+    # image: themasterid/yamdb_final:latest
     restart: always
     volumes:
       - static_value:/app/static/
@@ -33,3 +34,4 @@ services:
 volumes:
   static_value:
   media_value:
+  postgres_data:
