@@ -5,18 +5,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(BASE_DIR)
+
 SECRET_KEY = (
     os.getenv('SECRET_KEY'),
     'my_mega_secret_code_ilz@4zqj=rq&agdol^##zgl9(vs')
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    '62.84.115.143',
-    'themasterid.sytes.net',
-    '*',
-]
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,7 +40,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'api_yamdb.urls'
 
-TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
@@ -104,14 +100,11 @@ USE_L10N = True
 
 USE_TZ = False
 
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-STATIC_URL = 'reviews/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'reviews/static/')
-
-MEDIA_URL = 'reviews/media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'reviews/media/')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 REST_FRAMEWORK = {

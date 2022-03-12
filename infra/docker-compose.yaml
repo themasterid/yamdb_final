@@ -1,10 +1,15 @@
 version: '3.8'
 
+volumes:
+  postgres_data:
+  static_value:
+  media_value:
+
 services:
   db:
     image: postgres:13.0-alpine
     volumes:
-      - /var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
 
@@ -12,8 +17,8 @@ services:
     image: themasterid/yamdb_final:latest
     restart: always
     volumes:
-      - static_value:/app/api_yamdb/static/
-      - media_value:/app/api_yamdb/media/
+      - static_value:/app/static/
+      - media_value:/app/media/
     depends_on:
       - db
     env_file:
@@ -25,11 +30,7 @@ services:
       - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - static_value:/var/html/static/
-      - media_value:/var/html/media/
+      - static_value:/app/static/
+      - media_value:/app/media/
     depends_on:
       - web
-
-volumes:
-  static_value:
-  media_value:
