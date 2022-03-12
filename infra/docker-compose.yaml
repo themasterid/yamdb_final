@@ -9,9 +9,6 @@ services:
       - ./.env
 
   web:
-    #build:
-    #  context: ..
-    #  dockerfile: api_yamdb/Dockerfile
     image: themasterid/yamdb_final:latest
     restart: always
     volumes:
