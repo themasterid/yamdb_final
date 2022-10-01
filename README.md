@@ -1,9 +1,9 @@
 
 ![Yamdb Workflow Status](https://github.com/themasterid/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg?branch=master&event=push)
-# API_YAMDB 
-REST API проект для сервиса YaMDb — сбор отзывов о фильмах, книгах или музыке. 
+# ДОПИСАТЬ РЕДМИ И ИСПРАВИТЬ БАГИ! Не позднее 10.10.2022
+# API_YAMDB - REST API проект для сервиса YaMDb — сбор отзывов о фильмах, книгах или музыке. 
 
-Проект развернут по адресу: http://themasterid.sytes.net/redoc/
+Проект развернут по адресу: http://localhost:8000/redoc/
 ## Описание 
  
 Проект YaMDb собирает отзывы пользователей на произведения. Произведения делятся на категории:«Книги», «Фильмы», «Музыка». Список категорий  может быть расширен (например, можно добавить категорию «Изобразительное искусство» или «Ювелирка»).
@@ -80,7 +80,7 @@ sudo docker run hello-world
 sudo apt -y install postgresql
 ```
 
-Предварительно в папке infra создаем файл .env с следующим содержимом:
+## Предварительно в папке infra создаем файл .env с следующим содержимом:
 ```bash
 DB_ENGINE=django.db.backends.postgresql 
 DB_NAME=postgres 
@@ -138,4 +138,6 @@ DB_HOST=db
 DB_PORT=5432 
 ```
 ### Документация API YaMDb 
-Документация доступна по эндпойнту:http://themasterid.sytes.net/redoc/ 
+Документация доступна по эндпойнту: http://localhost:8000/redoc/
+
+Автор: [Дмитрий Клепиков](https://github.com/themasterid) :+1:
