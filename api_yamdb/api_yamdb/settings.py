@@ -10,7 +10,7 @@ SECRET_KEY = (
     os.getenv('SECRET_KEY'),
     'my_mega_secret_code_ilz@4zqj=rq&agdol^##zgl9(vs')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '62.84.115.143',
@@ -137,6 +137,8 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
@@ -150,3 +152,8 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 AUTH_USER_MODEL = 'reviews.User'
+
+# {
+# "username": "test",
+# "confirmation_code": "64p-3620fe748d43507aad35"
+# }

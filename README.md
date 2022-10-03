@@ -14,11 +14,11 @@
 - автоматический деплой на боевой сервер при пуше в главную ветку main.
 
 Стек:
-- Django 2.2.28
-- DRF 3.12.4
-- djangorestframework-simplejwt 5.0.0
+- Django 4.1.1
+- DRF 3.14.0
+- djangorestframework-simplejwt 5.2.1
 - psycopg2-binary 2.9.3
-- PyJWT 2.4.0
+- PyJWT 2.5.0
 
 ### Как запустить проект:
 Все описанное ниже относится к ОС Linux.
@@ -88,12 +88,13 @@ sudo systemctl start docker
 ```bash
 sudo systemctl status docker
 ```
+### Проверим:
 ```bash
 sudo docker run hello-world 
 ```
 ### Не будет лишнем установить PostgreSQL:
 ```bash
-sudo apt -y install postgresql
+sudo apt install postgresql postgresql-contrib -y
 ```
 
 ### Предварительно в папке infra создаем файл .env с следующим содержимом:
@@ -106,14 +107,115 @@ DB_HOST=db
 DB_PORT=5432
 ```
 
-# ДОПИСАТЬ!!! 01.10.2022
+### Так как требование ТЗ и тестов использовать postgresql, то создадим в системе бд, установив локаль:
+```bash
+sudo dpkg-reconfigure locales 
+```
+### Выбираем ru_RU.UTF-8 нажав пробел и ждем сообщения Generation complete.
+```
+Generating locales (this might take a while)...
+...
+  ru_RU.UTF-8... done
+...
+Generation complete.
+```
+### Перезапустим систему:
+```bash
+sudo reboot
+```
+### Установка PostgreSQL:
+```bash
+sudo apt install postgresql postgresql-contrib -y
+```
+### Управляем БД:
+- Остановить
+```bash
+sudo systemctl stop postgresql
+```
+```bash
+- Запустить
+```bash
+sudo systemctl start postgresql
+```
+- Перезапустить
+```bash
+sudo systemctl restart postgresql
+```
+- Узнать статус, текущее состояние
+```bash
+sudo systemctl status postgresql
+```
+### Создаем бд и пользователя:
+```bash
+sudo -u postgres psql
+```
+### Создаем базу:
+```sql
+CREATE DATABASE test_base;
+```
+### Создаем пользователя:
+```sql
+CREATE USER test_user WITH ENCRYPTED PASSWORD 'test_pass';
+```
+### Даем права для пользователя:
+```sql
+GRANT ALL PRIVILEGES ON DATABASE test_base TO test_user;
+```
+### Не забываем про установку, что мы сделали ранее, активировав venv:
+```bash
+pip install psycopg2-binary
+```
+```bash
+pip install python-dotenv
+```
+### В settings.py добавляем следующее:
+```python
+from dotenv import load_dotenv
+
+load_dotenv()
+
+...
+
+DATABASES = {
+    'default': {
+        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT')
+    }
+}
+```
+### Далее в папке где у нас находится файл settings.py создаем файл .env:
+```bash
+touch .env
+```
+```bash
+nano .env
+```
+```
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=test_base
+POSTGRES_USER=test_user
+POSTGRES_PASSWORD=test_pass
+DB_HOST=127.0.0.1
+DB_PORT=5432
+```
+### Не забываем про миграции (виртуальное окружение активировано):
+```bash
+python manage.py migrate
+```
+
+# ДОПИСАТЬ!!! 03.10.2022
 # Так же исправить settings.py с .env для секретов!
 
-### Поднимаем контейнеры (
-###     infra_db - база,
-###     infra_web - веб,
-###     infra_nginx - nginx сервер
-###     возможно пригодится команда sudo systemctl stop nginx если запускаете в DEV режиме на ПК):
+### 
+Поднимаем контейнеры (
+    infra_db - база,
+    infra_web - веб,
+    nfra_nginx - nginx сервер
+    возможно пригодится команда sudo systemctl stop nginx если запускаете в DEV режиме на ПК):
 ```bash
 sudo docker-compose up -d --build 
 ```
