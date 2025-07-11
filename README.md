@@ -1,6 +1,6 @@
 
 ![Yamdb Workflow Status](https://github.com/themasterid/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg?branch=master&event=push)
-# ДОПИСАТЬ РЕДМИ И ИСПРАВИТЬ БАГИ! Не позднее 10.10.2022
+# ДОПИСАТЬ РЕДМИ И ИСПРАВИТЬ БАГИ! Не позднее 10.10.2026
 # ЯП - Спринт 16 - CI и CD проекта api_yamdb. Python-разработчик (бекенд) (Яндекс.Практикум)
 
 
