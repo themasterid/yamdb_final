@@ -2,7 +2,7 @@ asgiref==3.5.2
 Django==4.2.24
 django-filter==2.4.0
 djangorestframework==3.15.2
-djangorestframework-simplejwt==5.2.1
+djangorestframework-simplejwt>=5.5.1
 gunicorn==23.0.0
 psycopg2-binary==2.9.3
 PyJWT==2.5.0
